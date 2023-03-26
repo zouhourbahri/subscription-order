@@ -1,0 +1,34 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>
+            <h2>Confirmation</h2>
+        </mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+        <div class="list-item">
+            <label class="text-bold">Selected subscription:</label>
+            <span class="box w-40">{{ subscriptionParams.duration }} months, {{ subscriptionParams.storage }} GB</span>
+        </div>
+        <div class="list-item">
+            <label class="text-bold">Price per GB:</label>
+            <span class="box w-40">{{ subscriptionPlan.price_usd_per_gb | currency }}</span>
+        </div>
+        <div class="list-item">
+            <label class="text-bold">Total price:</label>
+            <span [ngClass]="{ 'discounted-price': subscriptionParams.upfrontPayment }" class="box">
+                {{ totalPrice | currency }}
+            </span>
+        </div>
+        <div class="list-item">
+            <label class="text-bold">Email:</label>
+            <span class="box w-40">{{ email }}</span>
+        </div>
+        <mat-checkbox [(ngModel)]="termsAndConditions" [checked]="termsAndConditions"></mat-checkbox>
+        <span>Accept terms and conditions</span>
+        <div class="btn-grp">
+            <button mat-raised-button color="accent" type="button" (click)="back()">Back</button>
+            <button mat-raised-button color="primary" type="button" class="ml-1" (click)="onConfirm()" [disabled]="!termsAndConditions">Confirm</button>
+        </div>
+    </mat-card-content>
+</mat-card>

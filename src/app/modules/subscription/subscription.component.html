@@ -1,0 +1,25 @@
+<mat-tab-group #tabGroup aria-disabled="true" [selectedIndex]="selectedIndex" disabled>
+    <mat-tab aria-label="parameters" [disabled]="activeTab !== 'parameters'">
+        <ng-template mat-tab-label>
+            <span [ngClass]="activeTab === 'parameters'? 'text-color':''">
+      Parameters
+    </span>
+        </ng-template>
+        <app-parameters (changeTabulation)="handleTabChange($event)"></app-parameters>
+    </mat-tab>
+    <mat-tab aria-label="payment" [disabled]="activeTab !== 'payment'">
+        <ng-template mat-tab-label>
+            <span [ngClass]="activeTab === 'payment'? 'text-color':''">Payment</span
+    >
+  </ng-template>
+  <app-payment (changeTabulation)="handleTabChange($event)"></app-payment>
+</mat-tab>
+<mat-tab aria-label="confirmation" [disabled]="activeTab !== 'confirmation'">
+  <ng-template mat-tab-label>
+    <span [ngClass]="activeTab === 'confirmation'? 'text-color':''">
+      Confirmation
+    </span>
+        </ng-template>
+        <app-confirmation *ngIf="activeTab == 'confirmation'" (actionStat)="handleTabChange($event)"></app-confirmation>
+    </mat-tab>
+</mat-tab-group>

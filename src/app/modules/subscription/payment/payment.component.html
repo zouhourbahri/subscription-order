@@ -1,0 +1,43 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Payment Data</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <div class="list-item w-100 px-5">
+            <span class="box w-100 mr-20">Selected subscription: {{ subscriptionParams.duration }} months, {{ subscriptionParams.storage }} GB</span>
+        </div>
+        <form [formGroup]="creditCardForm">
+            <mat-form-field appearance="outline" class="form-field">
+                <mat-label>Credit Card Number</mat-label>
+                <input matInput formControlName="number">
+                <mat-error *ngIf="checkFieldValidity('number')">
+                    Credit card number is invalid.
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="form-field">
+                <mat-label>Expiration Date</mat-label>
+                <input matInput formControlName="expirationDate" [matDatepicker]="picker">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                <mat-error *ngIf="checkFieldValidity('expirationDate')">
+                    Expiration Date is required.
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="form-field">
+                <mat-label>Security Code</mat-label>
+                <input matInput formControlName="securityCode">
+                <mat-error *ngIf="checkFieldValidity('securityCode')">
+                    Please enter a valid security code.
+                </mat-error>
+            </mat-form-field>
+
+            <div class="btn-grp">
+                <button mat-raised-button color="accent" type="button" (click)="goBackToPreviousTabulation()">Back</button>
+                <button mat-raised-button color="primary" type="button" class="ml-1" (click)="goToNextTabulation()" [disabled]="!creditCardForm.valid">Next</button>
+            </div>
+        </form>
+    </mat-card-content>
+
+</mat-card>
